@@ -1,0 +1,15 @@
+[package]
+name = "libcypher-parser-sys"
+version = "0.1.0"
+authors = ["Kevin Oberlies <favilo@gmail.com>"]
+edition = "2018"
+links = "cypher-parser"
+readme = "README.md"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[build-dependencies]
+pkg-config = "0.3.18"
+bindgen = "0.55.1"
