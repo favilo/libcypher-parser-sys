@@ -7,7 +7,10 @@ include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::{ffi::CString, ptr::null_mut};
+    use std::{
+        ffi::{CStr, CString},
+        ptr::null_mut,
+    };
 
     #[test]
     fn it_works() {
@@ -30,6 +33,16 @@ mod tests {
             assert_eq!(1, cypher_parse_result_ndirectives(result));
             assert_eq!(1, cypher_parse_result_nroots(result));
             assert_eq!(0, cypher_parse_result_nerrors(result));
+
+            let root = cypher_parse_result_get_root(result, 0);
+            assert_eq!(1, cypher_astnode_nchildren(root));
+
+            let tipe = cypher_astnode_type(root);
+            assert_eq!(tipe, CYPHER_AST_STATEMENT);
+
+            let type_string = CStr::from_ptr(cypher_astnode_typestr(tipe));
+            assert_eq!(CString::new("statement").unwrap().as_c_str(), type_string,);
+
             cypher_parse_result_free(result);
         }
     }
