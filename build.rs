@@ -27,6 +27,7 @@ fn main() {
         .whitelist_function("libcypher.*")
         .whitelist_var("cypher.*")
         .whitelist_var("CYPHER.*")
+        .derive_default(true)
         // Set enumerations to generate rust version
         .rustified_enum("cypher_rel_direction")
         // Finish the builder and generate the bindings.
