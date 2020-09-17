@@ -13,13 +13,12 @@ mod tests {
     };
 
     #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
-
-    #[test]
     fn sanity_check() {
         unsafe {
+            assert_eq!(
+                CString::new("0.6.0").unwrap().as_c_str(),
+                CStr::from_ptr(libcypher_parser_version())
+            );
             let stmt = "MATCH (n) RETURN n";
             let result = cypher_uparse(
                 CString::new(stmt).unwrap().as_ptr(),

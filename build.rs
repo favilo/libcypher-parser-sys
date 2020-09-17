@@ -2,6 +2,7 @@ use std::{env, path::PathBuf};
 
 fn main() {
     println!("cargo:rerun-if-changed=wrapper.h");
+    println!("cargo:rerun-if-changed=build.rs");
 
     pkg_config::Config::new()
         .atleast_version("0.6.0")
@@ -23,6 +24,7 @@ fn main() {
         .opaque_type("std.*")
         .whitelist_type("cypher.*")
         .whitelist_function("cypher.*")
+        .whitelist_function("libcypher.*")
         .whitelist_var("cypher.*")
         .whitelist_var("CYPHER.*")
         // Set enumerations to generate rust version
